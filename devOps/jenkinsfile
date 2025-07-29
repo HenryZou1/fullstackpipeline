@@ -1,0 +1,117 @@
+pipeline{
+    agent any
+    
+    parameters {
+        booleanParam(name: 'BUILD_FRONTEND', defaultValue: false, description: 'build and deploy react?')
+    }
+
+    environment{
+        GIT_CREDENTIAL_ID = 'github_user_pwd'
+        GIT_REPO = 'https://github.com/StackOps-bridge/applied-devops.git'
+        GIT_BRANCH = 'develop'
+        
+        NGINX_HTML = 'C:\\apps\\nginx-1.28.0\\html\\'
+        API_DIR = 'c:\\apps\\nginx-1.28.0\\html\\api'
+        API_NAME_USER = 'userAPI'
+        API_NAME_EVENT = "eventAPI"
+    }
+    
+    stages{
+        stage('Check out source code'){
+            steps{
+                echo "start check out code from ${GIT_REPO}"
+                git credentialsId: "${GIT_CREDENTIAL_ID}", url:"${GIT_REPO}", branch:"${GIT_BRANCH}"
+                echo "check out done"
+            }    
+        }
+        stage('build userAPI'){
+            steps{
+                dir('userAPI'){
+                    bat 'gradlew clean build'
+                }
+            }
+        }
+        stage('build eventAPI'){
+            steps{
+                dir('eventAPI'){
+                    bat 'gradlew clean build'
+                }
+            }
+        }
+        stage('build front-end react app'){
+            when{
+                expression{return params.BUILD_FRONTEND}
+            }
+            steps{
+                dir('client_na_aia'){
+                    withEnv(['CI=false']){
+                        bat 'npm install'
+                        bat 'npm run build'
+                    }
+                }
+            }
+        }
+        stage('deploy microservices'){
+            steps{
+                script{
+                    def fullPath = "${API_DIR}\\${API_NAME_USER}"
+                    def checkCommand = "if not exist \"${fullPath}\" mkdir \"${fullPath}\""
+                    bat checkCommand
+    
+                    def jarPath = "userAPI\\build\\libs\\userAPI-1.0.jar"
+                    def targetJar = "${fullPath}\\userAPI.jar"
+                    bat "copy ${jarPath} ${targetJar}"
+    
+                     bat "start /B cmd /C \"java -jar ${targetJar} --server.port=9090 > ${fullPath}\\userAPI.log 2>&1\""
+                    
+                    def fullPath1 = "${API_DIR}\\${API_NAME_EVENT}"
+                    def checkCommand1 = "if not exist \"${fullPath1}\" mkdir \"${fullPath1}\""
+                    bat checkCommand1
+    
+                    // Example: copy jar to the target
+                    def jarPath1 = "eventAPI\\build\\libs\\eventAPI-1.0.jar"
+                    def targetJar1 = "${fullPath1}\\eventAPI.jar"
+                    bat "copy ${jarPath1} ${targetJar1}"
+    
+                    // Example: run the JAR
+                    bat "start /B cmd /C \"java -jar ${targetJar1} --server.port=9090 > ${fullPath1}\\eventAPI.log 2>&1\""
+                }    
+            }
+        }
+        stage('Deploy front-end app') {
+            when{
+                expression{return params.BUILD_FRONTEND}
+            }
+            steps {
+                script {
+                    def buildPath = 'client_na_aia\\build\\*'
+                    def targetPath = "${env.NGINX_HTML}"
+
+                    bat "xcopy /E /Y /I ${buildPath} ${targetPath}"
+                }
+            }
+        }
+    }
+    
+     post {
+        success {
+            slackSend (
+                message: "✅ SUCCESS: Job '${env.JOB_NAME} [#${env.BUILD_NUMBER}]' completed successfully. ${env.BUILD_URL}"
+            )
+        }
+
+        failure {
+            slackSend (
+                message: "❌ FAILURE: Job '${env.JOB_NAME} [#${env.BUILD_NUMBER}]' failed. ${env.BUILD_URL}"
+            )
+        }
+
+        always {
+            echo "Build completed. Slack notified."
+            echo "show userAPI startup."
+            bat "type ${API_DIR}\\${API_NAME_USER}\\userAPI.log"
+            echo "show eventAPI startup."
+            bat "type ${API_DIR}\\${API_NAME_EVENT}\\eventAPI.log"
+        }
+    }
+}
