@@ -21,6 +21,12 @@ configurations {
 }
 
 repositories {
+	maven {
+        name = "nexus-proxy"
+		allowInsecureProtocol = true
+        url = uri("http://localhost:8081/repository/maven-central/")
+    }
+
     mavenCentral()  // This usually includes the central repository
     maven { url 'https://repo.spring.io/release' }
 }
