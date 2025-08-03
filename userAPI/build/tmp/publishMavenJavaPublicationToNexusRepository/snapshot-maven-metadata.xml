@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>com.stackops</groupId>
+  <artifactId>userAPI</artifactId>
+  <versioning>
+    <lastUpdated>20250802221043</lastUpdated>
+    <snapshot>
+      <timestamp>20250802.221043</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0-20250802.221043-1</value>
+        <updated>20250802221043</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>module</extension>
+        <value>1.0-20250802.221043-1</value>
+        <updated>20250802221043</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <classifier>plain</classifier>
+        <extension>jar</extension>
+        <value>1.0-20250802.221043-1</value>
+        <updated>20250802221043</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+  <version>1.0-SNAPSHOT</version>
+</metadata>

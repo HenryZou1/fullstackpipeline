@@ -1,0 +1,95 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.stackops",
+    "module": "userAPI",
+    "version": "1.0-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.10.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "userAPI-1.0-SNAPSHOT-plain.jar",
+          "url": "userAPI-1.0-SNAPSHOT-plain.jar",
+          "size": 9389,
+          "sha512": "cfd0b30ae269699159d8ea1ee571a6dca4d0d841ff9f38c47ba8076888efd9225eb8853fd7271b68475bb12a3b8a4efebcccb12ba1155d81364dac98d5463820",
+          "sha256": "87d4dacbc7ce7ffff9132518f888b37171e86fe9809b9ddfb8fc04927f3a41f0",
+          "sha1": "c2ffeb2012ad77e8d720c363e0723e35b4d3bbe5",
+          "md5": "955f4826b203193cfd2f5e5c15ec4009"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-web"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-data-mongodb"
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-security"
+        },
+        {
+          "group": "io.jsonwebtoken",
+          "module": "jjwt",
+          "version": {
+            "requires": "0.9.1"
+          }
+        },
+        {
+          "group": "com.google.api-client",
+          "module": "google-api-client",
+          "version": {
+            "requires": "1.32.1"
+          }
+        },
+        {
+          "group": "com.google.http-client",
+          "module": "google-http-client-jackson2",
+          "version": {
+            "requires": "1.41.8"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "userAPI-1.0-SNAPSHOT-plain.jar",
+          "url": "userAPI-1.0-SNAPSHOT-plain.jar",
+          "size": 9389,
+          "sha512": "cfd0b30ae269699159d8ea1ee571a6dca4d0d841ff9f38c47ba8076888efd9225eb8853fd7271b68475bb12a3b8a4efebcccb12ba1155d81364dac98d5463820",
+          "sha256": "87d4dacbc7ce7ffff9132518f888b37171e86fe9809b9ddfb8fc04927f3a41f0",
+          "sha1": "c2ffeb2012ad77e8d720c363e0723e35b4d3bbe5",
+          "md5": "955f4826b203193cfd2f5e5c15ec4009"
+        }
+      ]
+    }
+  ]
+}
