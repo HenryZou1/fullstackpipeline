@@ -4,33 +4,22 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.6'
     id 'maven-publish'
 }
-
 group = 'com.stackops'
-version = '1.0-SNAPSHOT'
-
+version = project.findProperty('version') ?: '1.0.0-SNAPSHOT'
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
 }
-
 repositories {
-	maven {
-        name = "nexus-proxy"
-		allowInsecureProtocol = true
-        url = uri("http://localhost:8081/repository/maven-central/")
-    }
-
     mavenCentral()  // This usually includes the central repository
     maven { url 'https://repo.spring.io/release' }
 }
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
@@ -38,25 +27,26 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation 'com.google.api-client:google-api-client:1.32.1' 
 	implementation 'com.google.http-client:google-http-client-jackson2:1.41.8' 
-	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
-
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            from components.java  // publishes your JAR
-        }
-    }
+			from components.java
+			groupId = "${project.group}"
+			artifactId = "userAPI"
+			version = "${project.version}"
+			artifact bootJar
+		}
+	}
     repositories {
         maven {
             name = "nexus"
-            url = uri("http://localhost:8081/repository/maven-snapshots/")
+			url = project.findProperty("nexusRepoUrl")
 			allowInsecureProtocol = true
 			credentials {
                 username = project.findProperty("nexusUsername")
@@ -64,4 +54,3 @@ publishing {
             }
         }
     }
-}
