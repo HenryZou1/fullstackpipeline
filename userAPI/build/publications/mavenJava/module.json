@@ -3,9 +3,9 @@
   "component": {
     "group": "com.stackops",
     "module": "userAPI",
-    "version": "1.0-SNAPSHOT",
+    "version": "unspecified",
     "attributes": {
-      "org.gradle.status": "integration"
+      "org.gradle.status": "release"
     }
   },
   "createdBy": {
@@ -25,13 +25,13 @@
       },
       "files": [
         {
-          "name": "userAPI-1.0-SNAPSHOT-plain.jar",
-          "url": "userAPI-1.0-SNAPSHOT-plain.jar",
+          "name": "userAPI-unspecified-plain.jar",
+          "url": "userAPI-unspecified-plain.jar",
           "size": 9389,
-          "sha512": "cfd0b30ae269699159d8ea1ee571a6dca4d0d841ff9f38c47ba8076888efd9225eb8853fd7271b68475bb12a3b8a4efebcccb12ba1155d81364dac98d5463820",
-          "sha256": "87d4dacbc7ce7ffff9132518f888b37171e86fe9809b9ddfb8fc04927f3a41f0",
-          "sha1": "c2ffeb2012ad77e8d720c363e0723e35b4d3bbe5",
-          "md5": "955f4826b203193cfd2f5e5c15ec4009"
+          "sha512": "defacf97a4fdd5e15b645b5e2993fc14d33030f3b38d20e1c581efac12d91320d34909985c93ea279d41747e118d5a2be38f2be339caca29e0d27fba305e932c",
+          "sha256": "54a8d8e9e24f7dab75ed3b02c74556ff2b47d9055ba5ea979d321680353ed95d",
+          "sha1": "c76966cc095f89db570acaba6f1216cd682786df",
+          "md5": "3c457eb6086207ac6e52ed038e6d9eec"
         }
       ]
     },
@@ -81,13 +81,13 @@
       ],
       "files": [
         {
-          "name": "userAPI-1.0-SNAPSHOT-plain.jar",
-          "url": "userAPI-1.0-SNAPSHOT-plain.jar",
+          "name": "userAPI-unspecified-plain.jar",
+          "url": "userAPI-unspecified-plain.jar",
           "size": 9389,
-          "sha512": "cfd0b30ae269699159d8ea1ee571a6dca4d0d841ff9f38c47ba8076888efd9225eb8853fd7271b68475bb12a3b8a4efebcccb12ba1155d81364dac98d5463820",
-          "sha256": "87d4dacbc7ce7ffff9132518f888b37171e86fe9809b9ddfb8fc04927f3a41f0",
-          "sha1": "c2ffeb2012ad77e8d720c363e0723e35b4d3bbe5",
-          "md5": "955f4826b203193cfd2f5e5c15ec4009"
+          "sha512": "defacf97a4fdd5e15b645b5e2993fc14d33030f3b38d20e1c581efac12d91320d34909985c93ea279d41747e118d5a2be38f2be339caca29e0d27fba305e932c",
+          "sha256": "54a8d8e9e24f7dab75ed3b02c74556ff2b47d9055ba5ea979d321680353ed95d",
+          "sha1": "c76966cc095f89db570acaba6f1216cd682786df",
+          "md5": "3c457eb6086207ac6e52ed038e6d9eec"
         }
       ]
     }

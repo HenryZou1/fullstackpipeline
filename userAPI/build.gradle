@@ -17,8 +17,13 @@ configurations {
 	}
 }
 repositories {
-    mavenCentral()  // This usually includes the central repository
-    maven { url 'https://repo.spring.io/release' }
+    maven {
+        name = "nexus-proxy"
+		allowInsecureProtocol = true
+        url = uri("http://localhost:8081/repository/maven-central/")
+    }
+	 mavenCentral() // fallback if Nexus is unavailable or not populated
+
 }
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
